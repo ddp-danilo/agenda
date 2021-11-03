@@ -15,7 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from core import views
 
 urlpatterns = [
+    path('', views.mapa),
     path('admin/', admin.site.urls),
+    path('lista/Evento', views.lista_evento), # uma lista com todos os items da tabela evento.
+    path('evento/<titulo_evento>', views.mostra_evento), # mostra as informacoes do evento requisitado
+    path('mapa/', views.mapa), # um mapa do site
+    path('teste/', views.test) # Uma pagina para fazer experimentos
 ]
