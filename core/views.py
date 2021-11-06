@@ -21,11 +21,13 @@ def mostra_evento(request, titulo_evento):
                                                                                          evento.descricao,
                                                                                          evento.data_evento,))
 def mapa(request):
-    paginas = ['admin','lista/Evento','teste']
-    url = ''
-    for pagina in paginas:
-        url += '<a href="/{}">{}</a></br>'.format(pagina, pagina)
-    return HttpResponse(url)
+    paginas = ['admin','agenda','teste',]
+    #url = ''
+    #for pagina in paginas:
+    #    url += '<a href="/{}">{}</a></br>'.format(pagina, pagina)
+    #return HttpResponse(url paginas)
+    dados = {'paginas':paginas}
+    return render(request, 'mapa.html', dados)
 
 def lista_eventos(request):
     if not request.user.is_authenticated:

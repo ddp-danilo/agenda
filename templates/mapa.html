@@ -1,0 +1,6 @@
+{% extends 'model-page.html' %}
+{% block content %}
+    {% for pagina in paginas %}
+        <a href="/{{pagina}}"><b>{{pagina}}</b></a></br>
+    {% endfor %}
+{% endblock %}

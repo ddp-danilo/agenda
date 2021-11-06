@@ -1,8 +1,12 @@
 {% extends 'model-page.html' %}
 {% block content %}
     <h2>Agendamentos</h2>
-    {% for evento in eventos%}
-        <a href="/evento/{{evento.titulo}}"><b>Nome: {{evento.titulo}} - Data do Evento: {{evento.get_data}}</b></a>
-        </br>
-    {% endfor %}
+    {% if len(eventos) == 0 %}
+        <div><p>Nenhum item.</p></div>
+    {% endif %}
+    {% else %}
+        {% for evento in eventos%}
+            <div><a href="/evento/{{evento.titulo}}"><b>Nome: {{evento.titulo}} - Data do Evento: {{evento.get_data}}</b></a></div>
+        {% endfor %}
+    {% endelse %}
 {% endblock %}
