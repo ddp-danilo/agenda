@@ -16,12 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from core import views
+from django.views.generic import RedirectView
 
 urlpatterns = [
-    path('', views.mapa),
+
+#    path('', views.index), # uso de uma view para criar o indice do site
+    path('', RedirectView.as_view(url='/agenda')), # indice se a necesidade de criar uma view
     path('admin/', admin.site.urls),
-    path('lista/Evento', views.lista_evento), # uma lista com todos os items da tabela evento.
+    #path('lista/Evento', views.lista_evento), # uma lista com todos os items da tabela evento.
     path('evento/<titulo_evento>', views.mostra_evento), # mostra as informacoes do evento requisitado
     path('mapa/', views.mapa), # um mapa do site
-    path('teste/', views.test) # Uma pagina para fazer experimentos
+    path('teste/', views.test), # Uma pagina para fazer experimentos
+    path('agenda/', views.lista_eventos),
 ]

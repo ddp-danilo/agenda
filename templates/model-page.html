@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'model-header.html'%}
+</head>
+<style>
+    body {color:white; background-color:#220000;}
+    a {color:#8c8a89; text-decoration:none;}
+    a:hover{color:orange;}
+</style>
+<body>
+    {% block content %} {% endblock %}
+    {% include 'model-footer.html' %}
+
+</body>
+</html>
