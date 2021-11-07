@@ -32,5 +32,6 @@ urlpatterns = [
     path('login/submit', views.submit_login),
     path('logout', views.logout_user),
     path('agenda/eventos/', views.evento),
-    path('agenda/eventos/submit', views.add_evento)
+    path('agenda/eventos/submit', views.submit_evento),
+    path('agenda/eventos/delete/<int:id_evento>/', views.delete_evento),
 ]

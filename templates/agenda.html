@@ -5,6 +5,9 @@
     <button type="button">Novo Evento</button>
     </a>
     {% for evento in eventos%}
-        <div><a href="/evento/{{evento.titulo}}"><b>Nome: {{evento.titulo}} - Data do Evento: {{evento.get_data}}</b></a></div>
+        <ul>
+            <li>Nome: {{evento.titulo}} - Data do Evento: {{evento.get_data}}
+                (<a href="eventos/?id={{ evento.id }}"> Editar </a>/ <a href="eventos/delete/{{ evento.id }}/">Excluir</a>)</li>
+        </ul>
     {% endfor %}
 {% endblock %}
