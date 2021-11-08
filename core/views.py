@@ -25,17 +25,9 @@ def submit_login(request):
 
 @login_required(login_url='/login/')
 def lista_eventos(request):
-    data_atual_smma1 = datetime.now() + timedelta(weeks=1)
-    data_atual = datetime.now()
-    usuario = request.user  # puxa o usuario que está abrindo a pagina.
-    # evento = Evento.objects.get(id=1) # puxa Um item especifico da lista Evento.
-    # evento = Evento.objects.all() # puxo uma lista com todos os itens de Evento.
-    #evento = Evento.objects.filter(usuario=usuario) # puxa somente os ítens da tabela Evento que pertencem ao usuario atual.
-    #evento = Evento.objects.filter(usuario=usuario, data_evento=data_atual)# puxa os eventos da data atual.
-    #evento = Evento.objects.filter(data_evento__gt=data_atual)# puxa os eventos que tiverem a data maior que a data atual.
-    evento = Evento.objects.filter(usuario=usuario,
-                                   data_evento__lt=data_atual_smma1,
-                                   data_evento__gt=data_atual)# mostra eventos dos proximos sete dias
+    data_atual = datetime.now() - timedelta(hours=1)
+    usuario = request.user
+    evento = Evento.objects.filter(usuario=usuario, data_evento__gt=data_atual, )
     dados = {'eventos':evento}
     return render(request, 'agenda.html', dados)
 

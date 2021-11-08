@@ -1,13 +1,13 @@
 {% extends 'model-page.html' %}
 {% block content %}
-    <h2>Agendamentos</h2>
+    <div><h2>Agendamentos</h2> <strong style="color:red;">(Atrasados)</strong> <strong style="color:#ffbb00;">(Próximos)</strong></div>
     <a href="eventos/">
     <button type="button">Novo Evento</button>
     </a>
     {% for evento in eventos%}
         <ul>
-            <div style={% if evento.get_evento_atrasado %}"color:red;"{% endif %}>
-            <li>Nome: {{evento.titulo}} - Data do Evento: {{evento.get_data}}
+            <div style="color:{{ evento.get_evento_color }};">
+            <li>{{evento.titulo}} - Data do Evento: {{evento.get_data}}
                 (<a href="eventos/?id={{ evento.id }}"> Editar </a>/ <a href="eventos/delete/{{ evento.id }}/">Excluir</a>)</li>
             </div>
         </ul>

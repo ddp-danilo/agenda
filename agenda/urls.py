@@ -20,18 +20,16 @@ from django.views.generic import RedirectView
 
 urlpatterns = [
 
-#    path('', views.index), # uso de uma view para criar o indice do site
-    path('', RedirectView.as_view(url='/agenda')), # indice se a necesidade de criar uma view
+    path('', RedirectView.as_view(url='/agenda')), # indice sem a necessidade de criar uma view
     path('admin/', admin.site.urls),
-    #path('lista/Evento', views.lista_evento), # uma lista com todos os items da tabela evento.
     path('evento/<titulo_evento>', views.mostra_evento), # mostra as informacoes do evento requisitado
     path('mapa/', views.mapa), # um mapa do site
     path('teste/', views.test), # Uma pagina para fazer experimentos
-    path('agenda/', views.lista_eventos),
-    path('agenda/lista', views.json_lista_evento),
     path('login/', views.login_user),
     path('login/submit', views.submit_login),
     path('logout', views.logout_user),
+    path('agenda/', views.lista_eventos),
+    path('agenda/lista', views.json_lista_evento),
     path('agenda/eventos/', views.evento),
     path('agenda/eventos/submit', views.submit_evento),
     path('agenda/eventos/delete/<int:id_evento>/', views.delete_evento),
