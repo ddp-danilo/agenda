@@ -3,6 +3,8 @@ from core.models import Evento
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from datetime import datetime, timedelta
+from django.http.response import Http404, JsonResponse
 
 def login_user(request):
     return render(request, 'login.html')
@@ -23,10 +25,17 @@ def submit_login(request):
 
 @login_required(login_url='/login/')
 def lista_eventos(request):
-    usuario = request.user  # puxa o usuario que está abrindo a pagina
-    # evento = Evento.objects.get(id=1) # puxa Um item especifico da lista Evento
-    # evento = Evento.objects.all() # puxo uma lista com todos os itens de Evento
-    evento = Evento.objects.filter(usuario=usuario) # puxa somente os ítens da tabela Evento que pertencem ao usuario atual
+    data_atual_smma1 = datetime.now() + timedelta(weeks=1)
+    data_atual = datetime.now()
+    usuario = request.user  # puxa o usuario que está abrindo a pagina.
+    # evento = Evento.objects.get(id=1) # puxa Um item especifico da lista Evento.
+    # evento = Evento.objects.all() # puxo uma lista com todos os itens de Evento.
+    #evento = Evento.objects.filter(usuario=usuario) # puxa somente os ítens da tabela Evento que pertencem ao usuario atual.
+    #evento = Evento.objects.filter(usuario=usuario, data_evento=data_atual)# puxa os eventos da data atual.
+    #evento = Evento.objects.filter(data_evento__gt=data_atual)# puxa os eventos que tiverem a data maior que a data atual.
+    evento = Evento.objects.filter(usuario=usuario,
+                                   data_evento__lt=data_atual_smma1,
+                                   data_evento__gt=data_atual)# mostra eventos dos proximos sete dias
     dados = {'eventos':evento}
     return render(request, 'agenda.html', dados)
 
@@ -69,11 +78,23 @@ def submit_evento(request):
 @login_required(login_url='/login')
 def delete_evento(request, id_evento):
     usuario = request.user
-    evento = Evento.objects.get(id=id_evento)
+    try:
+        evento = Evento.objects.get(id=id_evento)
+    except Exception:
+        print('ok')#debug
+        raise Http404
     if evento.usuario == usuario:
         evento.delete()
+    else:
+        print('ok')  # debug
+        raise Http404
     return redirect('/')
 
+@login_required(login_url='/login')
+def json_lista_evento(request):
+    usuario = request.user
+    evento = Evento.objects.filter(usuario=usuario).values('id', 'titulo')
+    return JsonResponse(list(evento), safe=False)
 
 
 #def index(request):    # uma maneira de setar a home do site

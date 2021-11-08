@@ -28,6 +28,7 @@ urlpatterns = [
     path('mapa/', views.mapa), # um mapa do site
     path('teste/', views.test), # Uma pagina para fazer experimentos
     path('agenda/', views.lista_eventos),
+    path('agenda/lista', views.json_lista_evento),
     path('login/', views.login_user),
     path('login/submit', views.submit_login),
     path('logout', views.logout_user),
