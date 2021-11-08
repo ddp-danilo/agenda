@@ -25,11 +25,16 @@ def submit_login(request):
 
 @login_required(login_url='/login/')
 def lista_eventos(request):
-    data_atual = datetime.now() - timedelta(hours=1)
+    data_atual_mn1h = datetime.now() - timedelta(hours=1)# data atual menos uma hora.
     usuario = request.user
-    evento = Evento.objects.filter(usuario=usuario, data_evento__gt=data_atual, )
+    if request.GET.get('hist') == 'True':
+        evento = Evento.objects.filter(usuario=usuario, data_evento__lt=data_atual_mn1h)
+        template = 'hist.html'
+    else:
+        evento = Evento.objects.filter(usuario=usuario, data_evento__gt=data_atual_mn1h)
+        template = 'agenda.html'
     dados = {'eventos':evento}
-    return render(request, 'agenda.html', dados)
+    return render(request, template, dados)
 
 @login_required(login_url='/login')
 def evento(request):

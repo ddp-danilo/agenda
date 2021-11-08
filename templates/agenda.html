@@ -4,6 +4,7 @@
     <a href="eventos/">
     <button type="button">Novo Evento</button>
     </a>
+    <a href="?hist=True">Eventos passados</a>
     {% for evento in eventos%}
         <ul>
             <div style="color:{{ evento.get_evento_color }};">
