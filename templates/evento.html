@@ -1,29 +1,46 @@
 {% extends "model-page.html" %}
 {% block content %}
-    <h1>Evento</h1>
-    <label>Titulo</label>
-    <form action="submit" method="POST">{% csrf_token %}
-        <br>
+    <h3>
+        {% if evento.id %}
+            Editar
+        {% else %}
+            Novo
+        {% endif %}
+           Evento
+    </h3>
+
+    <form action="submit" method="POST" class="evento-form">{% csrf_token %}
+        <div style="overflow:hidden;">
+            <h3 class="evt-lb">Titulo</h3>
+        </div>
         <input type="text" name="titulo" size="27" value="{{ evento.titulo }}">
         <input type="number" name="id_evento" value="{{ evento.id }}" hidden>
         <br>
-        <label>Data do Evento</label>
-        <br>
+        <div style="overflow:hidden;">
+            <h3 class="evt-lb">Data do Evento</h3>
+                <h5 class="error-m" style="float:left; margin:0px; margin-left:2px;">
+                    *
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                </h5>
+        </div>
         <input type="datetime-local" name="data_evento" value="{{ evento.get_data_input_evento }}">
         <br>
-        <label>Local</label>
-        <br>
+        <div style="overflow:hidden;">
+            <h3 class="evt-lb">Local</h3>
+        </div>
         <input type="text" name="local" size="27" value="{{ evento.local }}">
-        <br>
-        <label>Descrição</label>
-        <br>
+        <div style="overflow:hidden;">
+            <h3 class="evt-lb">Descrição</h3>
+        </div>
         <textarea name="descricao" rows="5" cols="29" >{{ evento.descricao }}</textarea>
         <br><br>
         <button type="submit" name="salvar">Salvar</button>
-
-    </form>
-    <a href="/">
-            <button name="cancelar">Cancelar</button>
+        <a href="/">
+            <button name="cancelar" type="button">Cancelar</button>
         </a>
+    </form>
+
 
 {% endblock %}

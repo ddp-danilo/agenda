@@ -47,8 +47,12 @@ def evento(request):
 @login_required(login_url='/login')
 def submit_evento(request):
     if request.POST:
-        titulo = request.POST.get('titulo')
         data_evento = request.POST.get('data_evento')
+        if data_evento == "":
+            messages.error(request, "A data do evento não pode estar vazia!")
+            return redirect('/agenda/eventos')
+        titulo = request.POST.get('titulo')
+
         descricao = request.POST.get('descricao')
         usuario = request.user
         local = request.POST.get('local')

@@ -1,16 +1,29 @@
 {% extends 'model-page.html' %}
 {% block content %}
-    <div><h2>Agendamentos</h2> <strong style="color:red;">(Atrasados)</strong> <strong style="color:#ffbb00;">(Próximos)</strong></div>
-    <a href="eventos/">
-    <button type="button">Novo Evento</button>
-    </a>
-    <a href="?hist=True">Eventos passados</a>
-    {% for evento in eventos%}
-        <ul>
-            <div style="color:{{ evento.get_evento_color }};">
-            <li>{{evento.titulo}} - Data do Evento: {{evento.get_data}}
-                (<a href="eventos/?id={{ evento.id }}"> Editar </a>/ <a href="eventos/delete/{{ evento.id }}/">Excluir</a>)</li>
-            </div>
-        </ul>
-    {% endfor %}
+    <table align="center" style="width:auto;">
+        <tr>
+            <th >Nome</th>
+            <th>Data</th>
+            <th></th>
+        </tr>
+        {% for evento in eventos%}
+            <tr style="color:{{ evento.get_evento_color }};">
+                <td>{{evento.titulo}} </td>
+                <td> {{evento.get_data}}</td>
+                <td>(<a href="eventos/?id={{ evento.id }}"> Editar </a>/ <a href="eventos/delete/{{ evento.id }}/">Excluir</a>)</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <div Class="agendaft">
+        <a href="eventos/">
+        <button type="button">Novo Evento</button>
+        </a>
+
+        <div class="hd-ft-right">
+            <strong style="color:red;">(Atrasados)</strong>
+            <strong style="color:#ffbb00;">(Próximos)</strong>
+            <a href="?hist=True">Histórico</a>
+        </div>
+    </div>
+
 {% endblock %}

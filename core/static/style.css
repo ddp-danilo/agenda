@@ -1,0 +1,62 @@
+body {
+    background-color:#220000;
+    color:white;
+    margin:0;
+}
+.page-block {
+    padding:15px 15px;
+
+}
+.eventos-lista {
+    list-style-type:none;
+    text-align:center;
+}
+.eventos-tts div{
+    overflow:hidden;
+}
+.evt-lb {
+    float:left;
+    margin:0px;
+}
+.error-m {
+    color:red;
+}
+
+a{
+    text-decoration:none;
+    color:#bababa;
+}
+a:hover{
+    color:#6e6e6e;
+}
+.hd-ft-right {
+    float:right;
+    text-decoration:none;
+}
+.header {
+    overflow:hidden;
+    background-color:#2d2222;
+    padding: 12px 11px;
+}
+.agendaft{
+    overflow: hidden;
+
+}
+.app-name{
+    color:white;
+}
+button{
+    border:none;
+    color:black;
+    background-color:#ff5757;
+    padding: 5px 15px;
+    border-radius:4px;
+}
+button:hover{
+    background-color:#ff2e2e;
+}
+input, textarea{
+    background-color:#ff5757;
+    outline:none;
+    border:none;
+    }
