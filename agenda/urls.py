@@ -23,8 +23,6 @@ urlpatterns = [
     path('', RedirectView.as_view(url='/agenda')), # indice sem a necessidade de criar uma view
     path('admin/', admin.site.urls),
     path('evento/<titulo_evento>', views.mostra_evento), # mostra as informações do evento requisitado
-    path('mapa/', views.mapa), # mapa do site
-    path('teste/', views.test), # pagina de experimentos
     path('login/', views.login_user),
     path('login/submit', views.submit_login),
     path('logout', views.logout_user),

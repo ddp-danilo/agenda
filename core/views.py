@@ -39,9 +39,14 @@ def lista_eventos(request):
 @login_required(login_url='/login')
 def evento(request):
     id_evento = request.GET.get('id')
+    usuario = request.user
     dados = {}
     if id_evento:
-        dados['evento'] = Evento.objects.get(id=id_evento)
+        try:
+            dados['evento'] = Evento.objects.get(id=id_evento)
+        except Exception:
+            raise Http404
+
     return render(request, 'evento.html', dados)
 
 @login_required(login_url='/login')
@@ -82,12 +87,10 @@ def delete_evento(request, id_evento):
     try:
         evento = Evento.objects.get(id=id_evento)
     except Exception:
-        print('ok')#debug
         raise Http404
     if evento.usuario == usuario:
         evento.delete()
     else:
-        print('ok')  # debug
         raise Http404
     return redirect('/')
 
@@ -117,11 +120,3 @@ def mostra_evento(request, titulo_evento):
     return HttpResponse('Evento: {} </br> Descriçao:  {} </br> Data do Evento: {}'.format(evento.titulo,
                                                                                          evento.descricao,
                                                                                          evento.data_evento,))
-def mapa(request):
-    paginas = ['admin','agenda','teste',]
-    #url = ''
-    #for pagina in paginas:
-    #    url += '<a href="/{}">{}</a></br>'.format(pagina, pagina)
-    #return HttpResponse(url paginas)
-    dados = {'paginas':paginas}
-    return render(request, 'mapa.html', dados)
